@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   type ButtonHTMLAttributes,
   type HTMLAttributes,
@@ -8,7 +8,7 @@ import {
   useEffect,
   useRef,
   useState,
-} from 'react';
+} from "react";
 import {
   Dialog,
   DialogClose,
@@ -17,14 +17,14 @@ import {
   DialogPortal,
   DialogTitle,
   DialogTrigger,
-} from '@radix-ui/react-dialog';
-import { Loader2, RefreshCw, Send, X } from 'lucide-react';
-import defaultMdxComponents from 'fumadocs-ui/mdx';
-import { cn } from '../../lib/cn';
-import { buttonVariants } from '../ui/button';
-import type { Processor } from './markdown-processor';
-import Link from 'fumadocs-core/link';
-import { cva } from 'class-variance-authority';
+} from "@radix-ui/react-dialog";
+import { Loader2, RefreshCw, Send, X } from "lucide-react";
+import defaultMdxComponents from "fumadocs-ui/mdx";
+import { cn } from "../../lib/cn";
+import { buttonVariants } from "../ui/button";
+import type { Processor } from "./markdown-processor";
+import Link from "fumadocs-core/link";
+import { cva } from "class-variance-authority";
 
 export interface Engine {
   prompt: (
@@ -43,7 +43,7 @@ export interface Engine {
 }
 
 export interface MessageRecord {
-  role: 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
 
   suggestions?: string[];
@@ -57,7 +57,7 @@ export interface MessageReference {
   url: string;
 }
 
-type EngineType = 'orama' | 'inkeep';
+type EngineType = "orama" | "inkeep";
 
 const engines = new Map<EngineType, Engine>();
 
@@ -69,21 +69,21 @@ function AIDialog({ type }: { type: EngineType }) {
 
   useEffect(() => {
     // preload processor
-    void import('./markdown-processor');
+    void import("./markdown-processor");
 
-    if (type === 'orama') {
-      void import('./engines/orama').then(async (res) => {
-        const instance = engines.get(type) ?? (await res.createOramaEngine());
-        engines.set(type, instance);
-        setEngine(instance);
-      });
-    } else if (type === 'inkeep') {
-      void import('./engines/inkeep').then(async (res) => {
-        const instance = engines.get(type) ?? (await res.createInkeepEngine());
-        engines.set(type, instance);
-        setEngine(instance);
-      });
-    }
+    // if (type === "orama") {
+    //   void import("./engines/orama").then(async (res) => {
+    //     const instance = engines.get(type) ?? (await res.createOramaEngine());
+    //     engines.set(type, instance);
+    //     setEngine(instance);
+    //   });
+    // } else if (type === "inkeep") {
+    //   void import("./engines/inkeep").then(async (res) => {
+    //     const instance = engines.get(type) ?? (await res.createInkeepEngine());
+    //     engines.set(type, instance);
+    //     setEngine(instance);
+    //   });
+    // }
   }, [type, engine]);
 
   const onTry = useCallback(() => {
@@ -123,7 +123,7 @@ function AIDialog({ type }: { type: EngineType }) {
 
   useEffect(() => {
     if (shouldFocus.current) {
-      document.getElementById('nd-ai-input')?.focus();
+      document.getElementById("nd-ai-input")?.focus();
       shouldFocus.current = false;
     }
   });
@@ -135,8 +135,8 @@ function AIDialog({ type }: { type: EngineType }) {
         type="button"
         className={cn(
           buttonVariants({
-            color: 'secondary',
-            className: 'gap-1.5',
+            color: "secondary",
+            className: "gap-1.5",
           }),
         )}
         onClick={onTry}
@@ -148,7 +148,7 @@ function AIDialog({ type }: { type: EngineType }) {
         type="button"
         className={cn(
           buttonVariants({
-            color: 'ghost',
+            color: "ghost",
           }),
         )}
         onClick={onClear}
@@ -160,10 +160,10 @@ function AIDialog({ type }: { type: EngineType }) {
 
   return (
     <>
-      <List className={cn(messages.length === 0 && 'hidden')}>
+      <List className={cn(messages.length === 0 && "hidden")}>
         {messages.map((item, i) => (
           <Message key={i} message={item} onSuggestionSelected={onSubmit}>
-            {!loading && item.role === 'assistant' && i === messages.length - 1
+            {!loading && item.role === "assistant" && i === messages.length - 1
               ? activeBar
               : null}
           </Message>
@@ -174,8 +174,8 @@ function AIDialog({ type }: { type: EngineType }) {
           type="button"
           className={cn(
             buttonVariants({
-              color: 'secondary',
-              className: 'rounded-full mx-auto my-1',
+              color: "secondary",
+              className: "mx-auto my-1 rounded-full",
             }),
           )}
           onClick={() => {
@@ -197,31 +197,31 @@ function AIInput({
   loading: boolean;
   onSubmit: (message: string) => void;
 }) {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   const onStart = (e?: React.FormEvent) => {
     e?.preventDefault();
-    setMessage('');
+    setMessage("");
     onSubmit(message);
   };
 
   return (
     <form
       className={cn(
-        'flex flex-row rounded-b-lg border-t pe-2 transition-colors',
-        loading && 'bg-fd-muted',
+        "flex flex-row rounded-b-lg border-t pe-2 transition-colors",
+        loading && "bg-fd-muted",
       )}
       onSubmit={onStart}
     >
       <Input
         value={message}
-        placeholder={loading ? 'AI is answering...' : 'Ask AI something'}
+        placeholder={loading ? "AI is answering..." : "Ask AI something"}
         disabled={loading}
         onChange={(e) => {
           setMessage(e.target.value);
         }}
         onKeyDown={(event) => {
-          if (!event.shiftKey && event.key === 'Enter') {
+          if (!event.shiftKey && event.key === "Enter") {
             onStart();
             event.preventDefault();
           }
@@ -234,9 +234,9 @@ function AIInput({
           type="submit"
           className={cn(
             buttonVariants({
-              size: 'sm',
-              color: 'ghost',
-              className: 'rounded-full p-1',
+              size: "sm",
+              color: "ghost",
+              className: "rounded-full p-1",
             }),
           )}
           disabled={message.length === 0}
@@ -260,7 +260,7 @@ function List(props: HTMLAttributes<HTMLDivElement>) {
 
       container.scrollTo({
         top: container.scrollHeight,
-        behavior: 'instant',
+        behavior: "instant",
       });
     });
 
@@ -285,7 +285,7 @@ function List(props: HTMLAttributes<HTMLDivElement>) {
     <div
       {...props}
       ref={containerRef}
-      className={cn('min-h-0 flex-1 overflow-auto p-2', props.className)}
+      className={cn("min-h-0 flex-1 overflow-auto p-2", props.className)}
     >
       <div className="flex flex-col gap-1">{props.children}</div>
     </div>
@@ -294,7 +294,7 @@ function List(props: HTMLAttributes<HTMLDivElement>) {
 
 function Input(props: TextareaHTMLAttributes<HTMLTextAreaElement>) {
   const ref = useRef<HTMLDivElement>(null);
-  const shared = cn('col-start-1 row-start-1 max-h-60 min-h-12 px-3 py-1.5');
+  const shared = cn("col-start-1 row-start-1 max-h-60 min-h-12 px-3 py-1.5");
 
   return (
     <div className="grid flex-1">
@@ -302,12 +302,12 @@ function Input(props: TextareaHTMLAttributes<HTMLTextAreaElement>) {
         id="nd-ai-input"
         className={cn(
           shared,
-          'resize-none bg-transparent placeholder:text-fd-muted-foreground focus-visible:outline-none',
+          "resize-none bg-transparent placeholder:text-fd-muted-foreground focus-visible:outline-none",
         )}
         {...props}
       />
-      <div ref={ref} className={cn(shared, 'invisible whitespace-pre-wrap')}>
-        {`${props.value?.toString() ?? ''}\n`}
+      <div ref={ref} className={cn(shared, "invisible whitespace-pre-wrap")}>
+        {`${props.value?.toString() ?? ""}\n`}
       </div>
     </div>
   );
@@ -317,8 +317,8 @@ let processor: Processor | undefined;
 const map = new Map<string, ReactNode>();
 
 const roleName: Record<string, string> = {
-  user: 'you',
-  assistant: 'fumadocs',
+  user: "you",
+  assistant: "fumadocs",
 };
 
 function Message({
@@ -337,7 +337,7 @@ function Message({
 
   useEffect(() => {
     const run = async () => {
-      const { createProcessor } = await import('./markdown-processor');
+      const { createProcessor } = await import("./markdown-processor");
 
       processor ??= createProcessor();
       let result = map.get(message.content);
@@ -363,18 +363,18 @@ function Message({
   return (
     <div
       className={cn(
-        'rounded-lg border bg-fd-card px-2 py-1.5 text-fd-card-foreground',
-        message.role === 'user' &&
-          'bg-fd-secondary text-fd-secondary-foreground',
+        "rounded-lg border bg-fd-card px-2 py-1.5 text-fd-card-foreground",
+        message.role === "user" &&
+          "bg-fd-secondary text-fd-secondary-foreground",
       )}
     >
       <p
         className={cn(
-          'mb-1 text-xs font-medium text-fd-muted-foreground',
-          message.role === 'assistant' && 'text-fd-primary',
+          "mb-1 text-xs font-medium text-fd-muted-foreground",
+          message.role === "assistant" && "text-fd-primary",
         )}
       >
-        {roleName[message.role] ?? 'unknown'}
+        {roleName[message.role] ?? "unknown"}
       </p>
       <div className="prose text-sm">{rendered}</div>
       {references.length > 0 ? (
@@ -401,8 +401,8 @@ function Message({
               type="button"
               className={cn(
                 buttonVariants({
-                  color: 'secondary',
-                  className: 'py-1 text-nowrap',
+                  color: "secondary",
+                  className: "text-nowrap py-1",
                 }),
               )}
               onClick={() => {
@@ -420,12 +420,12 @@ function Message({
 }
 
 const typeButtonVariants = cva(
-  'inline-flex items-center justify-center rounded-lg px-2 py-1 text-sm font-medium transition-colors duration-100',
+  "inline-flex items-center justify-center rounded-lg px-2 py-1 text-sm font-medium transition-colors duration-100",
   {
     variants: {
       active: {
-        true: 'bg-fd-primary/10 text-fd-primary',
-        false: 'text-fd-muted-foreground',
+        true: "bg-fd-primary/10 text-fd-primary",
+        false: "text-fd-muted-foreground",
       },
     },
   },
@@ -434,10 +434,10 @@ const typeButtonVariants = cva(
 export function Trigger(props: ButtonHTMLAttributes<HTMLButtonElement>) {
   const engines = [
     {
-      label: 'Inkeep',
-      value: 'inkeep',
+      label: "Inkeep",
+      value: "inkeep",
     },
-    { label: 'Orama', value: 'orama' },
+    { label: "Orama", value: "orama" },
   ] as const;
   const [type, setType] = useState<EngineType>(engines[0].value);
 
@@ -448,7 +448,7 @@ export function Trigger(props: ButtonHTMLAttributes<HTMLButtonElement>) {
         <DialogOverlay className="fixed inset-0 z-50 bg-fd-background/50 backdrop-blur-sm data-[state=closed]:animate-fd-fade-out data-[state=open]:animate-fd-fade-in" />
         <DialogContent
           onOpenAutoFocus={(e) => {
-            document.getElementById('nd-ai-input')?.focus();
+            document.getElementById("nd-ai-input")?.focus();
             e.preventDefault();
           }}
           aria-describedby={undefined}

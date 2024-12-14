@@ -1,10 +1,10 @@
-import type { PageTree } from 'fumadocs-core/server';
-import { type ReactNode, type HTMLAttributes } from 'react';
-import Link from 'next/link';
-import { Languages, MoreHorizontal } from 'lucide-react';
-import { notFound } from 'next/navigation';
-import { cn } from '../lib/cn';
-import { buttonVariants } from './ui/button';
+import type { PageTree } from "fumadocs-core/server";
+import { type ReactNode, type HTMLAttributes } from "react";
+import Link from "next/link";
+import { Languages, MoreHorizontal } from "lucide-react";
+import { notFound } from "next/navigation";
+import { cn } from "../lib/cn";
+import { buttonVariants } from "./ui/button";
 import {
   CollapsibleSidebar,
   Sidebar,
@@ -13,35 +13,25 @@ import {
   SidebarCollapseTrigger,
   SidebarViewport,
   SidebarPageTree,
-} from './docs/sidebar';
-import { replaceOrDefault, type SharedNavProps } from './shared';
-import {
-  type LinkItemType,
-  type IconItemType,
-  BaseLinkItem,
-} from './links';
-import { getSidebarTabs, type TabOptions } from '../lib/get-sidebar-tabs';
-import { RootToggle } from './layout/root-toggle';
-import { type BaseLayoutProps, getLinks } from './shared';
-import {
-  LanguageToggle,
-  LanguageToggleText,
-} from './layout/language-toggle';
-import { LayoutBody, LinksMenu } from './docs.client';
-import { TreeContextProvider } from 'fumadocs-ui/provider';
-import { NavProvider, Title } from './layout/nav';
-import { ThemeToggle } from './layout/theme-toggle';
-import { Navbar, NavbarSidebarTrigger } from './docs/navbar';
-import {
-  LargeSearchToggle,
-  SearchToggle,
-} from './layout/search-toggle';
-import { SearchOnly } from 'fumadocs-ui/provider';
+} from "./docs/sidebar";
+import { replaceOrDefault, type SharedNavProps } from "./shared";
+import { type LinkItemType, type IconItemType, BaseLinkItem } from "./links";
+import { getSidebarTabs, type TabOptions } from "../lib/get-sidebar-tabs";
+import { RootToggle } from "./layout/root-toggle";
+import { type BaseLayoutProps, getLinks } from "./shared";
+import { LanguageToggle, LanguageToggleText } from "./layout/language-toggle";
+import { LayoutBody, LinksMenu } from "./docs.client";
+import { TreeContextProvider } from "fumadocs-ui/provider";
+import { NavProvider, Title } from "./layout/nav";
+import { ThemeToggle } from "./layout/theme-toggle";
+import { Navbar, NavbarSidebarTrigger } from "./docs/navbar";
+import { LargeSearchToggle, SearchToggle } from "./layout/search-toggle";
+import { SearchOnly } from "fumadocs-ui/provider";
 import {
   getSidebarTabsFromOptions,
   SidebarLinkItem,
   type SidebarOptions,
-} from './docs/shared';
+} from "./docs/shared";
 
 export interface DocsLayoutProps extends BaseLayoutProps {
   tree: PageTree.Root;
@@ -98,9 +88,9 @@ export function DocsLayout({
           id="nd-docs-layout"
           {...props.containerProps}
           className={cn(
-            'flex flex-1 flex-row md:[--fd-sidebar-width:260px] xl:[--fd-toc-width:260px] [&_#nd-toc]:max-xl:hidden [&_#nd-tocnav]:xl:hidden',
+            "flex flex-1 flex-row md:[--fd-sidebar-width:260px] xl:[--fd-toc-width:260px] [&_#nd-toc]:max-xl:hidden [&_#nd-tocnav]:xl:hidden",
             !navReplace && navEnabled
-              ? '[--fd-nav-height:3.5rem] md:[--fd-nav-height:0px]'
+              ? "[--fd-nav-height:3.5rem] md:[--fd-nav-height:0px]"
               : null,
             props.containerProps?.className,
           )}
@@ -127,7 +117,7 @@ export function DocsLayout({
               <SidebarViewport>
                 <div className="px-2 pt-4 empty:hidden md:hidden">
                   {links
-                    .filter((v) => v.type !== 'icon')
+                    .filter((v) => v.type !== "icon")
                     .map((item, i) => (
                       <SidebarLinkItem key={i} item={item} />
                     ))}
@@ -141,7 +131,7 @@ export function DocsLayout({
                   sidebarCollapsible={collapsible}
                   i18n={i18n}
                   disableThemeSwitch={props.disableThemeSwitch ?? false}
-                  iconItems={links.filter((v) => v.type === 'icon')}
+                  iconItems={links.filter((v) => v.type === "icon")}
                 />
                 {sidebarFooter}
               </SidebarFooter>
@@ -169,7 +159,7 @@ function SidebarHeaderItems({
     <div className="flex flex-row items-center max-md:hidden">
       {props.title ? (
         <Link
-          href={props.url ?? '/'}
+          href={props.url ?? "/"}
           className="inline-flex items-center gap-2.5 py-1 font-medium"
         >
           {props.title}
@@ -181,10 +171,10 @@ function SidebarHeaderItems({
           items={links}
           className={cn(
             buttonVariants({
-              size: 'icon',
-              color: 'ghost',
+              size: "icon",
+              color: "ghost",
             }),
-            'ms-auto',
+            "ms-auto",
           )}
         >
           <MoreHorizontal />
@@ -221,8 +211,8 @@ function SidebarFooterItems({
           key={i}
           item={item}
           className={cn(
-            buttonVariants({ size: 'icon', color: 'ghost' }),
-            'text-fd-muted-foreground md:hidden',
+            buttonVariants({ size: "icon", color: "ghost" }),
+            "text-fd-muted-foreground md:hidden",
           )}
           aria-label={item.label}
         >

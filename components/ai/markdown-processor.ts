@@ -1,16 +1,14 @@
-import { remark } from 'remark';
-import remarkGfm from 'remark-gfm';
-import remarkRehype from 'remark-rehype';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-import rehypeShikiFromHighlighter from '@shikijs/rehype/core';
-import { type Components, toJsxRuntime } from 'hast-util-to-jsx-runtime';
-import { type ReactNode } from 'react';
-import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { createHighlighter } from 'shiki/bundle/web';
-import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
-import type { Root } from 'hast';
-
+import { remark } from "remark";
+import remarkGfm from "remark-gfm";
+import remarkRehype from "remark-rehype";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import rehypeShikiFromHighlighter from "@shikijs/rehype/core";
+import { type Components, toJsxRuntime } from "hast-util-to-jsx-runtime";
+import { type ReactNode } from "react";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
+import { createHighlighter } from "shiki/bundle/web";
+import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 interface MetaValue {
   name: string;
   regex: RegExp;
@@ -21,7 +19,7 @@ interface MetaValue {
  */
 const metaValues: MetaValue[] = [
   {
-    name: 'title',
+    name: "title",
     regex: /title="(?<value>[^"]*)"/,
   },
 ];
@@ -37,15 +35,15 @@ export function createProcessor(): Processor {
   function filterMetaString(meta: string): string {
     let replaced = meta;
     for (const value of metaValues) {
-      replaced = replaced.replace(value.regex, '');
+      replaced = replaced.replace(value.regex, "");
     }
 
     return replaced;
   }
 
   const themes = {
-    light: 'vitesse-light',
-    dark: 'vitesse-dark',
+    light: "vitesse-light",
+    dark: "vitesse-dark",
   };
 
   const rehypeShiki = createHighlighter({
@@ -54,7 +52,7 @@ export function createProcessor(): Processor {
     engine: createJavaScriptRegexEngine(),
   }).then((highlighter) => {
     return rehypeShikiFromHighlighter(highlighter, {
-      defaultLanguage: 'text',
+      defaultLanguage: "text",
       defaultColor: false,
       themes,
       lazy: true,
@@ -73,19 +71,19 @@ export function createProcessor(): Processor {
       },
       transformers: [
         {
-          name: 'pre-process',
+          name: "pre-process",
           line(hast) {
             if (hast.children.length === 0) {
               // Keep the empty lines when using grid layout
               hast.children.push({
-                type: 'text',
-                value: ' ',
+                type: "text",
+                value: " ",
               });
             }
           },
           preprocess(_, { meta }) {
             if (meta) {
-              meta.__raw = filterMetaString(meta.__raw ?? '');
+              meta.__raw = filterMetaString(meta.__raw ?? "");
             }
           },
         },
@@ -97,16 +95,16 @@ export function createProcessor(): Processor {
     .use(remarkGfm)
     .use(remarkMath)
     .use(remarkRehype)
-    .use(rehypeKatex)
-    .use(() => {
-      return async (tree: Root, file) => {
-        const transformer = await rehypeShiki;
+    .use(rehypeKatex);
+  // .use(() => {
+  //   return async (tree, file) => {
+  //     const transformer = await rehypeShiki;
 
-        return transformer(tree, file, () => {
-          // do nothing
-        }) as Root;
-      };
-    });
+  //     return transformer(tree, file, () => {
+  //       // do nothing
+  //     })
+  //   };
+  // });
 
   return {
     async process(content, components) {

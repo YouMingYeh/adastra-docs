@@ -1,7 +1,7 @@
-'use client';
-import { ChevronDown, ExternalLink, SidebarIcon } from 'lucide-react';
-import * as Base from 'fumadocs-core/sidebar';
-import { usePathname } from 'next/navigation';
+"use client";
+import { ChevronDown, ExternalLink, SidebarIcon } from "lucide-react";
+import * as Base from "fumadocs-core/sidebar";
+import { usePathname } from "next/navigation";
 import {
   type ButtonHTMLAttributes,
   createContext,
@@ -13,28 +13,28 @@ import {
   useMemo,
   useRef,
   useState,
-} from 'react';
-import Link, { type LinkProps } from 'fumadocs-core/link';
-import { useOnChange } from 'fumadocs-core/utils/use-on-change';
-import { cn } from '../../lib/cn';
-import { ScrollArea, ScrollViewport } from '../ui/scroll-area';
-import { isActive } from '../../lib/is-active';
+} from "react";
+import Link, { type LinkProps } from "fumadocs-core/link";
+import { useOnChange } from "fumadocs-core/utils/use-on-change";
+import { cn } from "../../lib/cn";
+import { ScrollArea, ScrollViewport } from "../ui/scroll-area";
+import { isActive } from "../../lib/is-active";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '../ui/collapsible';
-import { type ScrollAreaProps } from '@radix-ui/react-scroll-area';
-import { useSidebar } from 'fumadocs-ui/provider';
-import { buttonVariants } from '../ui/button';
-import { cva } from 'class-variance-authority';
+} from "../ui/collapsible";
+import { type ScrollAreaProps } from "@radix-ui/react-scroll-area";
+import { useSidebar } from "fumadocs-ui/provider";
+import { buttonVariants } from "../ui/button";
+import { cva } from "class-variance-authority";
 import type {
   CollapsibleContentProps,
   CollapsibleTriggerProps,
-} from '@radix-ui/react-collapsible';
-import type { PageTree } from 'fumadocs-core/server';
-import { useTreeContext, useTreePath } from 'fumadocs-ui/provider';
-import type { SidebarComponents } from './shared';
+} from "@radix-ui/react-collapsible";
+import type { PageTree } from "fumadocs-core/server";
+import { useTreeContext, useTreePath } from "fumadocs-ui/provider";
+import type { SidebarComponents } from "./shared";
 
 export interface SidebarProps extends HTMLAttributes<HTMLElement> {
   /**
@@ -59,13 +59,13 @@ interface InternalContext {
 }
 
 const itemVariants = cva(
-  'flex flex-row items-center gap-2 rounded-md px-3 py-2 text-fd-muted-foreground transition-colors duration-100 [overflow-wrap:anywhere] md:px-2 md:py-1.5 [&_svg]:size-4',
+  "flex flex-row items-center gap-2 rounded-md px-3 py-2 text-fd-muted-foreground transition-colors duration-100 [overflow-wrap:anywhere] md:px-2 md:py-1.5 [&_svg]:size-4",
   {
     variants: {
       active: {
-        true: 'bg-fd-primary/10 font-medium text-fd-primary',
+        true: "bg-fd-primary/10 font-medium text-fd-primary",
         false:
-          'hover:bg-fd-accent/50 hover:text-fd-accent-foreground/80 hover:transition-none',
+          "hover:bg-fd-accent/50 hover:text-fd-accent-foreground/80 hover:transition-none",
       },
     },
   },
@@ -92,13 +92,13 @@ export function CollapsibleSidebar(props: SidebarProps) {
   });
 
   const onEnter: PointerEventHandler = useCallback((e) => {
-    if (e.pointerType === 'touch' || closeTimeRef.current > Date.now()) return;
+    if (e.pointerType === "touch" || closeTimeRef.current > Date.now()) return;
     window.clearTimeout(timerRef.current);
     setHover(true);
   }, []);
 
   const onLeave: PointerEventHandler = useCallback((e) => {
-    if (e.pointerType === 'touch') return;
+    if (e.pointerType === "touch") return;
     window.clearTimeout(timerRef.current);
 
     timerRef.current = window.setTimeout(
@@ -119,16 +119,16 @@ export function CollapsibleSidebar(props: SidebarProps) {
       onPointerLeave={collapsed ? onLeave : undefined}
       data-collapsed={collapsed}
       className={cn(
-        'md:transition-all',
+        "md:transition-all",
         collapsed &&
-          'md:-me-[var(--fd-sidebar-width)] md:translate-x-[calc(var(--fd-sidebar-offset)*-1)] rtl:md:translate-x-[var(--fd-sidebar-offset)]',
-        collapsed && hover && 'z-50 md:translate-x-0',
-        collapsed && !hover && 'md:opacity-0',
+          "md:-me-[var(--fd-sidebar-width)] md:translate-x-[calc(var(--fd-sidebar-offset)*-1)] rtl:md:translate-x-[var(--fd-sidebar-offset)]",
+        collapsed && hover && "z-50 md:translate-x-0",
+        collapsed && !hover && "md:opacity-0",
         props.className,
       )}
       style={
         {
-          '--fd-sidebar-offset': 'calc(var(--fd-sidebar-width) - 20px)',
+          "--fd-sidebar-offset": "calc(var(--fd-sidebar-width) - 20px)",
         } as object
       }
     />
@@ -155,22 +155,22 @@ export function Sidebar({
         blockScrollingWidth={768} // md
         {...props}
         className={cn(
-          'fixed top-fd-layout-top z-30 bg-fd-card text-sm md:sticky md:h-[var(--fd-sidebar-height)]',
-          'max-md:inset-x-0 max-md:bottom-0 max-md:bg-fd-background/80 max-md:text-[15px] max-md:backdrop-blur-lg max-md:data-[open=false]:invisible',
+          "fixed top-fd-layout-top z-30 bg-fd-card text-sm md:sticky md:h-[var(--fd-sidebar-height)]",
+          "max-md:inset-x-0 max-md:bottom-0 max-md:bg-fd-background/80 max-md:text-[15px] max-md:backdrop-blur-lg max-md:data-[open=false]:invisible",
           props.className,
         )}
         style={
           {
             ...props.style,
-            '--fd-sidebar-height':
-              'calc(100dvh - var(--fd-banner-height) - var(--fd-nav-height))',
+            "--fd-sidebar-height":
+              "calc(100dvh - var(--fd-banner-height) - var(--fd-nav-height))",
           } as object
         }
       >
         <div
           {...inner}
           className={cn(
-            'flex size-full max-w-full flex-col pt-2 md:ms-auto md:w-[var(--fd-sidebar-width)] md:border-e md:pt-4',
+            "flex size-full max-w-full flex-col pt-2 md:ms-auto md:w-[var(--fd-sidebar-width)] md:border-e md:pt-4",
             inner?.className,
           )}
         >
@@ -186,7 +186,7 @@ export function SidebarHeader(props: HTMLAttributes<HTMLDivElement>) {
     <div
       {...props}
       className={cn(
-        'flex flex-col gap-2 px-4 empty:hidden md:px-3',
+        "flex flex-col gap-2 px-4 empty:hidden md:px-3",
         props.className,
       )}
     >
@@ -200,7 +200,7 @@ export function SidebarFooter(props: HTMLAttributes<HTMLDivElement>) {
     <div
       {...props}
       className={cn(
-        'flex flex-col border-t px-4 py-3 empty:hidden',
+        "flex flex-col border-t px-4 py-3 empty:hidden",
         props.className,
       )}
     >
@@ -211,10 +211,10 @@ export function SidebarFooter(props: HTMLAttributes<HTMLDivElement>) {
 
 export function SidebarViewport(props: ScrollAreaProps) {
   return (
-    <ScrollArea {...props} className={cn('h-full', props.className)}>
+    <ScrollArea {...props} className={cn("h-full", props.className)}>
       <ScrollViewport
         style={{
-          maskImage: 'linear-gradient(to bottom, transparent 2px, white 16px)',
+          maskImage: "linear-gradient(to bottom, transparent 2px, white 16px)",
         }}
       >
         {props.children}
@@ -228,7 +228,7 @@ export function SidebarSeparator(props: HTMLAttributes<HTMLParagraphElement>) {
     <p
       {...props}
       className={cn(
-        'mb-2 mt-8 px-3 text-sm font-medium first:mt-0 md:px-2',
+        "mb-2 mt-8 px-3 text-sm font-medium first:mt-0 md:px-2",
         props.className,
       )}
     >
@@ -291,12 +291,12 @@ export function SidebarFolderTrigger(props: CollapsibleTriggerProps) {
   return (
     <CollapsibleTrigger
       {...props}
-      className={cn(itemVariants({ active: false }), 'w-full pe-3.5 md:pe-1.5')}
+      className={cn(itemVariants({ active: false }), "w-full pe-3.5 md:pe-1.5")}
     >
       {props.children}
       <ChevronDown
         data-icon
-        className={cn('ms-auto transition-transform', !open && '-rotate-90')}
+        className={cn("ms-auto transition-transform", !open && "-rotate-90")}
       />
     </CollapsibleTrigger>
   );
@@ -316,11 +316,11 @@ export function SidebarFolderLink(props: LinkProps) {
       data-active={active}
       className={cn(
         itemVariants({ active }),
-        'w-full pe-3.5 md:pe-1.5',
+        "w-full pe-3.5 md:pe-1.5",
         props.className,
       )}
       onClick={(e) => {
-        if ((e.target as HTMLElement).hasAttribute('data-icon')) {
+        if ((e.target as HTMLElement).hasAttribute("data-icon")) {
           setOpen((prev) => !prev);
           e.preventDefault();
         } else {
@@ -332,7 +332,7 @@ export function SidebarFolderLink(props: LinkProps) {
       {props.children}
       <ChevronDown
         data-icon
-        className={cn('ms-auto transition-transform', !open && '-rotate-90')}
+        className={cn("ms-auto transition-transform", !open && "-rotate-90")}
       />
     </Link>
   );
@@ -361,8 +361,8 @@ export function SidebarCollapseTrigger(
       {...props}
       className={cn(
         buttonVariants({
-          color: 'ghost',
-          size: 'icon',
+          color: "ghost",
+          size: "icon",
         }),
         props.className,
       )}
@@ -378,13 +378,13 @@ export function SidebarCollapseTrigger(
 function useFolderContext() {
   const ctx = useContext(FolderContext);
 
-  if (!ctx) throw new Error('Missing sidebar folder');
+  if (!ctx) throw new Error("Missing sidebar folder");
   return ctx;
 }
 
 function useInternalContext(): InternalContext {
   const ctx = useContext(Context);
-  if (!ctx) throw new Error('<Sidebar /> component required.');
+  if (!ctx) throw new Error("<Sidebar /> component required.");
 
   return ctx;
 }
@@ -408,10 +408,10 @@ export function SidebarPageTree(props: {
         const id = `${item.type}_${i.toString()}`;
 
         switch (item.type) {
-          case 'separator':
+          case "separator":
             if (Separator) return <Separator key={id} item={item} />;
             return <SidebarSeparator key={id}>{item.name}</SidebarSeparator>;
-          case 'folder':
+          case "folder":
             if (Folder) return <Folder key={id} item={item} level={level} />;
             return (
               <PageTreeFolder key={id} item={item} level={level}>

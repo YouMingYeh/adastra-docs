@@ -1,14 +1,14 @@
-import type { HTMLAttributes, ReactNode } from 'react';
-import { replaceOrDefault } from './shared';
-import { cn } from '../lib/cn';
-import { getLinks, type BaseLayoutProps } from './shared';
-import { NavProvider, Title } from './layout/nav';
+import type { HTMLAttributes, ReactNode } from "react";
+import { replaceOrDefault } from "./shared";
+import { cn } from "../lib/cn";
+import { getLinks, type BaseLayoutProps } from "./shared";
+import { NavProvider, Title } from "./layout/nav";
 import {
   NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from './ui/navigation-menu';
+} from "./ui/navigation-menu";
 import {
   Navbar,
   NavbarLink,
@@ -16,22 +16,16 @@ import {
   NavbarMenuContent,
   NavbarMenuItem,
   NavbarMenuTrigger,
-} from './home/navbar';
-import { type LinkItemType } from './links';
-import {
-  LargeSearchToggle,
-  SearchToggle,
-} from './layout/search-toggle';
-import { ThemeToggle } from './layout/theme-toggle';
-import {
-  LanguageToggle,
-  LanguageToggleText,
-} from './layout/language-toggle';
-import { ChevronDown, Languages } from 'lucide-react';
-import { buttonVariants } from './ui/button';
-import { SearchOnly } from 'fumadocs-ui/provider';
-import Link from 'fumadocs-core/link';
-import { MenuLinkItem } from './home/menu';
+} from "./home/navbar";
+import { type LinkItemType } from "./links";
+import { LargeSearchToggle, SearchToggle } from "./layout/search-toggle";
+import { ThemeToggle } from "./layout/theme-toggle";
+import { LanguageToggle, LanguageToggleText } from "./layout/language-toggle";
+import { ChevronDown, Languages } from "lucide-react";
+import { buttonVariants } from "./ui/button";
+import { SearchOnly } from "fumadocs-ui/provider";
+import Link from "fumadocs-core/link";
+import { MenuLinkItem } from "./home/menu";
 
 export type HomeLayoutProps = BaseLayoutProps & HTMLAttributes<HTMLElement>;
 
@@ -45,10 +39,10 @@ export function HomeLayout({
 }: HomeLayoutProps): ReactNode {
   const finalLinks = getLinks(links, githubUrl);
   const navItems = finalLinks.filter((item) =>
-    ['nav', 'all'].includes(item.on ?? 'all'),
+    ["nav", "all"].includes(item.on ?? "all"),
   );
   const menuItems = finalLinks.filter((item) =>
-    ['menu', 'all'].includes(item.on ?? 'all'),
+    ["menu", "all"].includes(item.on ?? "all"),
   );
 
   return (
@@ -57,7 +51,7 @@ export function HomeLayout({
         id="nd-home-layout"
         {...props}
         className={cn(
-          'flex flex-1 flex-col pt-[var(--fd-nav-height)] [--fd-nav-height:56px]',
+          "flex flex-1 flex-col pt-[var(--fd-nav-height)] [--fd-nav-height:56px]",
           props.className,
         )}
       >
@@ -68,7 +62,7 @@ export function HomeLayout({
               aria-hidden="true"
               className="fixed inset-x-0 top-[var(--fd-banner-height)] z-40 h-6 bg-fd-background"
               style={{
-                maskImage: 'linear-gradient(to bottom,white,transparent)',
+                maskImage: "linear-gradient(to bottom,white,transparent)",
               }}
             />
             <Navbar>
@@ -107,10 +101,10 @@ export function HomeLayout({
                   <NavigationMenuTrigger
                     className={cn(
                       buttonVariants({
-                        size: 'icon',
-                        color: 'ghost',
+                        size: "icon",
+                        color: "ghost",
                       }),
-                      'group -me-2',
+                      "group -me-2",
                     )}
                   >
                     <ChevronDown className="size-3 transition-transform duration-300 group-data-[state=open]:rotate-180" />
@@ -165,9 +159,9 @@ function NavbarLinkItem({
   item: LinkItemType;
   className?: string;
 }) {
-  if (item.type === 'custom') return <div {...props}>{item.children}</div>;
+  if (item.type === "custom") return <div {...props}>{item.children}</div>;
 
-  if (item.type === 'menu') {
+  if (item.type === "menu") {
     return (
       <NavbarMenu>
         <NavbarMenuTrigger {...props}>
@@ -175,7 +169,7 @@ function NavbarLinkItem({
         </NavbarMenuTrigger>
         <NavbarMenuContent>
           {item.items.map((child, j) => {
-            if (child.type === 'custom')
+            if (child.type === "custom")
               return <div key={j}>{child.children}</div>;
 
             const { banner, footer, ...rest } = child.menu ?? {};
@@ -208,15 +202,15 @@ function NavbarLinkItem({
       {...props}
       item={item}
       variant={item.type}
-      aria-label={item.type === 'icon' ? item.label : undefined}
+      aria-label={item.type === "icon" ? item.label : undefined}
     >
-      {item.type === 'icon' ? item.icon : item.text}
+      {item.type === "icon" ? item.icon : item.text}
     </NavbarLink>
   );
 }
 
 function isSecondary(item: LinkItemType): boolean {
   return (
-    ('secondary' in item && item.secondary === true) || item.type === 'icon'
+    ("secondary" in item && item.secondary === true) || item.type === "icon"
   );
 }

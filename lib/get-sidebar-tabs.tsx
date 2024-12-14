@@ -1,5 +1,5 @@
-import type { PageTree } from 'fumadocs-core/server';
-import type { Option } from '../components/layout/root-toggle';
+import type { PageTree } from "fumadocs-core/server";
+import type { Option } from "../components/layout/root-toggle";
 
 export interface TabOptions {
   transform?: (option: Option, node: PageTree.Folder) => Option | null;
@@ -15,7 +15,7 @@ export function getSidebarTabs(
     if (node.root) {
       const index = node.index ?? node.children.at(0);
 
-      if (index?.type === 'page') {
+      if (index?.type === "page") {
         const option: Option = {
           url: index.url,
           title: node.name,
@@ -31,7 +31,7 @@ export function getSidebarTabs(
     }
 
     for (const child of node.children) {
-      if (child.type === 'folder') results.push(...findOptions(child));
+      if (child.type === "folder") results.push(...findOptions(child));
     }
 
     return results;
@@ -45,8 +45,8 @@ function getFolderUrls(folder: PageTree.Folder): string[] {
   if (folder.index) results.push(folder.index.url);
 
   for (const child of folder.children) {
-    if (child.type === 'page') results.push(child.url);
-    if (child.type === 'folder') results.push(...getFolderUrls(child));
+    if (child.type === "page") results.push(child.url);
+    if (child.type === "folder") results.push(...getFolderUrls(child));
   }
 
   return results;

@@ -1,11 +1,11 @@
-'use client';
-import type { TOCItemType } from 'fumadocs-core/server';
-import * as Primitive from 'fumadocs-core/toc';
-import { useEffect, useRef, useState } from 'react';
-import { cn } from '../../lib/cn';
-import { TocThumb } from './toc-thumb';
-import { ScrollArea, ScrollViewport } from '../ui/scroll-area';
-import { TocItemsEmpty } from './toc';
+"use client";
+import type { TOCItemType } from "fumadocs-core/server";
+import * as Primitive from "fumadocs-core/toc";
+import { useEffect, useRef, useState } from "react";
+import { cn } from "../../lib/cn";
+import { TocThumb } from "./toc-thumb";
+import { ScrollArea, ScrollViewport } from "../ui/scroll-area";
+import { TocItemsEmpty } from "./toc";
 
 export default function ClerkTOCItems({
   items,
@@ -49,12 +49,12 @@ export default function ClerkTOCItems({
         w = Math.max(offset, w);
         h = Math.max(h, bottom);
 
-        d.push(`${i === 0 ? 'M' : 'L'}${offset} ${top}`);
+        d.push(`${i === 0 ? "M" : "L"}${offset} ${top}`);
         d.push(`L${offset} ${bottom}`);
       }
 
       setSvg({
-        path: d.join(' '),
+        path: d.join(" "),
         width: w + 1,
         height: h,
       });
@@ -72,7 +72,7 @@ export default function ClerkTOCItems({
   if (items.length === 0) return <TocItemsEmpty />;
 
   return (
-    <ScrollArea className={cn('flex flex-col', isMenu && '-ms-3')}>
+    <ScrollArea className={cn("flex flex-col", isMenu && "-ms-3")}>
       <ScrollViewport className="relative min-h-0" ref={viewRef}>
         {svg ? (
           <div
@@ -160,9 +160,9 @@ function TOCItem({
       ) : null}
       <div
         className={cn(
-          'absolute inset-y-0 w-px bg-fd-foreground/10',
-          offset !== upperOffset && 'top-1.5',
-          offset !== lowerOffset && 'bottom-1.5',
+          "absolute inset-y-0 w-px bg-fd-foreground/10",
+          offset !== upperOffset && "top-1.5",
+          offset !== lowerOffset && "bottom-1.5",
         )}
         style={{
           insetInlineStart: offset,

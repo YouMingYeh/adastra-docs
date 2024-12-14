@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react';
-import { HomeLayout } from 'fumadocs-ui/layouts/home';
-import { baseOptions } from '@/app/layout.config';
+import type { ReactNode } from "react";
+import { baseOptions } from "@/app/layout.config";
+import { HomeLayout } from "@/components/home";
 
 export default function Layout({
   children,

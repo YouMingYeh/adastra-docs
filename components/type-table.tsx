@@ -1,15 +1,11 @@
-'use client';
+"use client";
 
-import { InfoIcon } from 'lucide-react';
-import Link from 'next/link';
-import { cva } from 'class-variance-authority';
-import { cn } from '../lib/cn';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from './ui/popover';
-import type { ReactNode } from 'react';
+import { InfoIcon } from "lucide-react";
+import Link from "next/link";
+import { cva } from "class-variance-authority";
+import { cn } from "../lib/cn";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import type { ReactNode } from "react";
 
 export function Info({ children }: { children: ReactNode }): ReactNode {
   return (
@@ -38,12 +34,12 @@ interface ObjectType {
   default?: string;
 }
 
-const field = cva('inline-flex flex-row items-center gap-1');
+const field = cva("inline-flex flex-row items-center gap-1");
 const code = cva(
-  'rounded-md bg-fd-secondary p-1 text-fd-secondary-foreground',
+  "rounded-md bg-fd-secondary p-1 text-fd-secondary-foreground",
   {
     variants: {
-      color: { primary: 'bg-fd-primary/10 text-fd-primary' },
+      color: { primary: "bg-fd-primary/10 text-fd-primary" },
     },
   },
 );
@@ -64,7 +60,7 @@ export function TypeTable({ type }: { type: Record<string, ObjectType> }) {
             <tr key={key}>
               <td>
                 <div className={field()}>
-                  <code className={cn(code({ color: 'primary' }))}>{key}</code>
+                  <code className={cn(code({ color: "primary" }))}>{key}</code>
                   {value.description ? <Info>{value.description}</Info> : null}
                 </div>
               </td>

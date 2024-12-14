@@ -1,15 +1,15 @@
-import { type PageTree, type TableOfContents } from 'fumadocs-core/server';
+import { type PageTree, type TableOfContents } from "fumadocs-core/server";
 import {
   type AnchorHTMLAttributes,
   forwardRef,
   type HTMLAttributes,
   type ReactNode,
-} from 'react';
-import type { LoaderConfig, LoaderOutput, Page } from 'fumadocs-core/source';
-import { type AnchorProviderProps, AnchorProvider } from 'fumadocs-core/toc';
-import { Card, Cards } from './card';
-import { replaceOrDefault } from './shared';
-import { cn } from '../lib/cn';
+} from "react";
+import type { LoaderConfig, LoaderOutput, Page } from "fumadocs-core/source";
+import { type AnchorProviderProps, AnchorProvider } from "fumadocs-core/toc";
+import { Card, Cards } from "./card";
+import { replaceOrDefault } from "./shared";
+import { cn } from "../lib/cn";
 import {
   Footer,
   type FooterProps,
@@ -17,7 +17,7 @@ import {
   PageHeader,
   Breadcrumb,
   type BreadcrumbProps,
-} from '../page.client';
+} from "../page.client";
 import {
   Toc,
   TOCItems,
@@ -25,27 +25,27 @@ import {
   TocPopover,
   TocPopoverContent,
   type TOCProps,
-} from './layout/toc';
-import { buttonVariants } from './ui/button';
-import { Edit, Text } from 'lucide-react';
-import { I18nLabel } from 'fumadocs-ui/provider';
-import ClerkTOCItems from './layout/toc-clerk';
+} from "./layout/toc";
+import { buttonVariants } from "./ui/button";
+import { Edit, Text } from "lucide-react";
+import { I18nLabel } from "fumadocs-ui/provider";
+import ClerkTOCItems from "./layout/toc-clerk";
 
-type TableOfContentOptions = Omit<TOCProps, 'items' | 'children'> &
-  Pick<AnchorProviderProps, 'single'> & {
+type TableOfContentOptions = Omit<TOCProps, "items" | "children"> &
+  Pick<AnchorProviderProps, "single"> & {
     enabled: boolean;
     component: ReactNode;
 
     /**
      * @defaultValue 'normal'
      */
-    style?: 'normal' | 'clerk';
+    style?: "normal" | "clerk";
   };
 
-type TableOfContentPopoverOptions = Omit<TableOfContentOptions, 'single'>;
+type TableOfContentPopoverOptions = Omit<TableOfContentOptions, "single">;
 
 interface EditOnGitHubOptions
-  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | 'children'> {
+  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "children"> {
   owner: string;
   repo: string;
 
@@ -147,12 +147,12 @@ export function DocsPage({
         id="nd-page"
         {...props.container}
         className={cn(
-          'flex w-full min-w-0 flex-col md:transition-[max-width]',
+          "flex w-full min-w-0 flex-col md:transition-[max-width]",
           props.container?.className,
         )}
         style={
           {
-            '--fd-toc-width': fullWidth ? '0px' : undefined,
+            "--fd-toc-width": fullWidth ? "0px" : undefined,
           } as object
         }
       >
@@ -163,7 +163,7 @@ export function DocsPage({
               <TocPopoverTrigger className="size-full" items={toc} />
               <TocPopoverContent>
                 {tocPopoverOptions.header}
-                {tocPopoverOptions.style === 'clerk' ? (
+                {tocPopoverOptions.style === "clerk" ? (
                   <ClerkTOCItems items={toc} isMenu />
                 ) : (
                   <TOCItems items={toc} isMenu />
@@ -180,8 +180,8 @@ export function DocsPage({
         <article
           {...props.article}
           className={cn(
-            'mx-auto flex w-full flex-1 flex-col gap-6 px-4 pt-8 max-xl:mx-0 md:pt-12 lg:px-8',
-            fullWidth ? 'max-w-[1120px]' : 'max-w-[860px]',
+            "mx-auto flex w-full flex-1 flex-col gap-6 px-4 pt-8 max-xl:mx-0 md:pt-12 lg:px-8",
+            fullWidth ? "max-w-[1120px]" : "max-w-[860px]",
             props.article?.className,
           )}
         >
@@ -217,7 +217,7 @@ export function DocsPage({
               <Text className="size-4" />
               <I18nLabel label="toc" />
             </h3>
-            {tocOptions.style === 'clerk' ? (
+            {tocOptions.style === "clerk" ? (
               <ClerkTOCItems items={toc} />
             ) : (
               <TOCItems items={toc} />
@@ -242,7 +242,7 @@ function EditOnGitHub({
   path,
   ...props
 }: EditOnGitHubOptions) {
-  const href = `https://github.com/${owner}/${repo}/blob/${sha}/${path.startsWith('/') ? path.slice(1) : path}`;
+  const href = `https://github.com/${owner}/${repo}/blob/${sha}/${path.startsWith("/") ? path.slice(1) : path}`;
 
   return (
     <a
@@ -252,8 +252,8 @@ function EditOnGitHub({
       {...props}
       className={cn(
         buttonVariants({
-          color: 'secondary',
-          className: 'gap-1.5 text-fd-muted-foreground',
+          color: "secondary",
+          className: "gap-1.5 text-fd-muted-foreground",
         }),
         props.className,
       )}
@@ -271,10 +271,10 @@ export const DocsBody = forwardRef<
   HTMLDivElement,
   HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('prose', className)} {...props} />
+  <div ref={ref} className={cn("prose", className)} {...props} />
 ));
 
-DocsBody.displayName = 'DocsBody';
+DocsBody.displayName = "DocsBody";
 
 export const DocsDescription = forwardRef<
   HTMLParagraphElement,
@@ -287,14 +287,14 @@ export const DocsDescription = forwardRef<
     <p
       ref={ref}
       {...props}
-      className={cn('mb-8 text-lg text-fd-muted-foreground', props.className)}
+      className={cn("mb-8 text-lg text-fd-muted-foreground", props.className)}
     >
       {props.children}
     </p>
   );
 });
 
-DocsDescription.displayName = 'DocsDescription';
+DocsDescription.displayName = "DocsDescription";
 
 export const DocsTitle = forwardRef<
   HTMLHeadingElement,
@@ -304,30 +304,30 @@ export const DocsTitle = forwardRef<
     <h1
       ref={ref}
       {...props}
-      className={cn('text-3xl font-bold', props.className)}
+      className={cn("text-3xl font-bold", props.className)}
     >
       {props.children}
     </h1>
   );
 });
 
-DocsTitle.displayName = 'DocsTitle';
+DocsTitle.displayName = "DocsTitle";
 
 function findParent(
   node: PageTree.Root | PageTree.Folder,
   page: Page,
 ): PageTree.Root | PageTree.Folder | undefined {
-  if ('index' in node && node.index?.$ref?.file === page.file.path) {
+  if ("index" in node && node.index?.$ref?.file === page.file.path) {
     return node;
   }
 
   for (const child of node.children) {
-    if (child.type === 'folder') {
+    if (child.type === "folder") {
       const parent = findParent(child, page);
       if (parent) return parent;
     }
 
-    if (child.type === 'page' && child.$ref?.file === page.file.path) {
+    if (child.type === "page" && child.$ref?.file === page.file.path) {
       return node;
     }
   }
@@ -355,7 +355,7 @@ export function DocsCategory({
   if (!parent) return null;
 
   const items = parent.children.flatMap<Page>((item) => {
-    if (item.type !== 'page' || item.url === page.url) return [];
+    if (item.type !== "page" || item.url === page.url) return [];
 
     return from.getNodePage(item) ?? [];
   });
@@ -368,7 +368,7 @@ export function DocsCategory({
           title={item.data.title}
           description={
             (item.data as { description?: string }).description ??
-            'No Description'
+            "No Description"
           }
           href={item.url}
         />

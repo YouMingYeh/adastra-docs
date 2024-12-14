@@ -1,4 +1,4 @@
-import { BaseLinkItem, type LinkItemType } from '../links';
+import { BaseLinkItem, type LinkItemType } from "../links";
 import {
   SidebarFolder,
   SidebarFolderContent,
@@ -6,13 +6,13 @@ import {
   SidebarFolderTrigger,
   SidebarItem,
   type SidebarProps,
-} from './sidebar';
-import { cn } from '../../lib/cn';
-import { buttonVariants } from '../ui/button';
-import type { PageTree } from 'fumadocs-core/server';
-import { getSidebarTabs, type TabOptions } from '../../lib/get-sidebar-tabs';
-import type { FC, ReactNode } from 'react';
-import type { Option } from '../layout/root-toggle';
+} from "./sidebar";
+import { cn } from "../../lib/cn";
+import { buttonVariants } from "../ui/button";
+import type { PageTree } from "fumadocs-core/server";
+import { getSidebarTabs, type TabOptions } from "../../lib/get-sidebar-tabs";
+import type { FC, ReactNode } from "react";
+import type { Option } from "../layout/root-toggle";
 
 export interface SidebarOptions extends SidebarProps {
   enabled: boolean;
@@ -44,7 +44,7 @@ export interface SidebarComponents {
 }
 
 export function SidebarLinkItem({ item }: { item: LinkItemType }) {
-  if (item.type === 'menu')
+  if (item.type === "menu")
     return (
       <SidebarFolder>
         {item.url ? (
@@ -66,14 +66,14 @@ export function SidebarLinkItem({ item }: { item: LinkItemType }) {
       </SidebarFolder>
     );
 
-  if (item.type === 'button') {
+  if (item.type === "button") {
     return (
       <BaseLinkItem
         item={item}
         className={cn(
           buttonVariants({
-            color: 'secondary',
-            className: 'gap-1.5 [&_svg]:size-4',
+            color: "secondary",
+            className: "gap-1.5 [&_svg]:size-4",
           }),
         )}
       >
@@ -83,7 +83,7 @@ export function SidebarLinkItem({ item }: { item: LinkItemType }) {
     );
   }
 
-  if (item.type === 'custom') return item.children;
+  if (item.type === "custom") return item.children;
 
   return (
     <SidebarItem href={item.url} icon={item.icon} external={item.external}>
@@ -93,12 +93,12 @@ export function SidebarLinkItem({ item }: { item: LinkItemType }) {
 }
 
 export function getSidebarTabsFromOptions(
-  options: SidebarOptions['tabs'],
+  options: SidebarOptions["tabs"],
   tree: PageTree.Root,
 ) {
   if (Array.isArray(options)) {
     return options;
-  } else if (typeof options === 'object') {
+  } else if (typeof options === "object") {
     return getSidebarTabs(tree, options);
   } else if (options !== false) {
     return getSidebarTabs(tree);

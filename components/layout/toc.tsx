@@ -1,21 +1,17 @@
-'use client';
-import type { TOCItemType } from 'fumadocs-core/server';
-import * as Primitive from 'fumadocs-core/toc';
-import { type HTMLAttributes, type ReactNode, useMemo, useRef } from 'react';
-import { cn } from '../../lib/cn';
-import { useI18n } from 'fumadocs-ui/provider';
-import { TocThumb } from './toc-thumb';
-import { ScrollArea, ScrollViewport } from '../ui/scroll-area';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '../ui/popover';
+"use client";
+import type { TOCItemType } from "fumadocs-core/server";
+import * as Primitive from "fumadocs-core/toc";
+import { type HTMLAttributes, type ReactNode, useMemo, useRef } from "react";
+import { cn } from "../../lib/cn";
+import { useI18n } from "fumadocs-ui/provider";
+import { TocThumb } from "./toc-thumb";
+import { ScrollArea, ScrollViewport } from "../ui/scroll-area";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import type {
   PopoverContentProps,
   PopoverTriggerProps,
-} from '@radix-ui/react-popover';
-import { ChevronRight, Text } from 'lucide-react';
+} from "@radix-ui/react-popover";
+import { ChevronRight, Text } from "lucide-react";
 
 export interface TOCProps {
   /**
@@ -37,14 +33,14 @@ export function Toc(props: HTMLAttributes<HTMLDivElement>) {
       {...props}
       data-toc=""
       className={cn(
-        'sticky top-fd-layout-top h-[var(--fd-toc-height)] flex-1 pb-2 pt-12',
+        "sticky top-fd-layout-top h-[var(--fd-toc-height)] flex-1 pb-2 pt-12",
         props.className,
       )}
       style={
         {
           ...props.style,
-          '--fd-toc-height':
-            'calc(100dvh - var(--fd-banner-height) - var(--fd-nav-height))',
+          "--fd-toc-height":
+            "calc(100dvh - var(--fd-banner-height) - var(--fd-nav-height))",
         } as object
       }
     >
@@ -76,7 +72,7 @@ export function TOCItems({
   if (items.length === 0) return <TocItemsEmpty />;
 
   return (
-    <ScrollArea className={cn('flex flex-col', isMenu && '-ms-3')}>
+    <ScrollArea className={cn("flex flex-col", isMenu && "-ms-3")}>
       <Primitive.ScrollProvider containerRef={viewRef}>
         <ScrollViewport className="relative min-h-0 text-sm" ref={viewRef}>
           <TocThumb
@@ -86,8 +82,8 @@ export function TOCItems({
           <div
             ref={containerRef}
             className={cn(
-              'flex flex-col',
-              !isMenu && 'border-s border-fd-foreground/10',
+              "flex flex-col",
+              !isMenu && "border-s border-fd-foreground/10",
             )}
           >
             {items.map((item) => (
@@ -105,10 +101,10 @@ function TOCItem({ item }: { item: TOCItemType }) {
     <Primitive.TOCItem
       href={item.url}
       className={cn(
-        'prose py-1.5 text-sm text-fd-muted-foreground transition-colors [overflow-wrap:anywhere] first:pt-0 last:pb-0 data-[active=true]:text-fd-primary',
-        item.depth <= 2 && 'ps-3.5',
-        item.depth === 3 && 'ps-6',
-        item.depth >= 4 && 'ps-8',
+        "prose py-1.5 text-sm text-fd-muted-foreground transition-colors [overflow-wrap:anywhere] first:pt-0 last:pb-0 data-[active=true]:text-fd-primary",
+        item.depth <= 2 && "ps-3.5",
+        item.depth === 3 && "ps-6",
+        item.depth >= 4 && "ps-8",
       )}
     >
       {item.title}
@@ -132,7 +128,7 @@ export function TocPopoverTrigger({
     <PopoverTrigger
       {...props}
       className={cn(
-        'inline-flex items-center gap-2 text-nowrap px-4 py-2 text-start',
+        "inline-flex items-center gap-2 text-nowrap px-4 py-2 text-start",
         props.className,
       )}
     >
@@ -158,7 +154,7 @@ export function TocPopoverContent(props: PopoverContentProps) {
       data-toc-popover=""
       {...props}
       className={cn(
-        'flex max-h-[var(--radix-popover-content-available-height)] w-[260px] flex-col gap-4 p-3',
+        "flex max-h-[var(--radix-popover-content-available-height)] w-[260px] flex-col gap-4 p-3",
         props.className,
       )}
     >

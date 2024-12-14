@@ -1,12 +1,12 @@
-'use client';
-import { ChevronDown } from 'lucide-react';
-import { type HTMLAttributes, type ReactNode, useMemo, useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { cn } from '../../lib/cn';
-import { isActive } from '../../lib/is-active';
-import { useSidebar } from 'fumadocs-ui/provider';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+"use client";
+import { ChevronDown } from "lucide-react";
+import { type HTMLAttributes, type ReactNode, useMemo, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "../../lib/cn";
+import { isActive } from "../../lib/is-active";
+import { useSidebar } from "fumadocs-ui/provider";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 export interface Option {
   /**
@@ -59,7 +59,7 @@ export function RootToggle({
         <PopoverTrigger
           {...props}
           className={cn(
-            'flex flex-row items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-fd-accent/50 hover:text-fd-accent-foreground',
+            "flex flex-row items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-fd-accent/50 hover:text-fd-accent-foreground",
             props.className,
           )}
         >
@@ -75,10 +75,10 @@ export function RootToggle({
             onClick={onClick}
             {...item.props}
             className={cn(
-              'flex w-full flex-row items-center gap-2 px-2 py-1.5',
+              "flex w-full flex-row items-center gap-2 px-2 py-1.5",
               selected === item
-                ? 'bg-fd-accent text-fd-accent-foreground'
-                : 'hover:bg-fd-accent/50',
+                ? "bg-fd-accent text-fd-accent-foreground"
+                : "hover:bg-fd-accent/50",
               item.props?.className,
             )}
           >

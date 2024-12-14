@@ -17,7 +17,7 @@ export function SearchToggle(props: ButtonHTMLAttributes<HTMLButtonElement>) {
           size: "icon",
           color: "ghost",
           className: props.className,
-        })
+        }),
       )}
       data-search=""
       aria-label="Open Search"
@@ -31,7 +31,7 @@ export function SearchToggle(props: ButtonHTMLAttributes<HTMLButtonElement>) {
 }
 
 export function LargeSearchToggle(
-  props: ButtonHTMLAttributes<HTMLButtonElement>
+  props: ButtonHTMLAttributes<HTMLButtonElement>,
 ) {
   const { hotKey, setOpenSearch } = useSearchContext();
   const { text } = useI18n();
@@ -43,7 +43,7 @@ export function LargeSearchToggle(
       {...props}
       className={cn(
         "inline-flex items-center gap-2 rounded-full border bg-fd-secondary/50 p-1.5 text-sm text-fd-muted-foreground transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground",
-        props.className
+        props.className,
       )}
       onClick={() => {
         setOpenSearch(true);
