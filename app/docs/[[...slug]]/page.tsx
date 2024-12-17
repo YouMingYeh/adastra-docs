@@ -40,7 +40,7 @@ export async function generateMetadata(props: {
   if (!page) notFound();
 
   return {
-    title: page.data.title,
+    title: page.data.title + " - Adastra 使用手冊",
     description: page.data.description,
   };
 }
