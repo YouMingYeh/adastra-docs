@@ -10,10 +10,10 @@ export function Providers({ children }: { children: ReactNode }) {
     <RootProvider
       search={{
         links: [
-          ["活動規劃", "/planning"],
-          ["活動推廣", "/promotion"],
-          ["活動當天", "/event-day"],
-          ["活動後續", "/follow-up"],
+          ["活動規劃", "/docs/planning"],
+          ["活動推廣", "/docs/promotion"],
+          ["活動當天", "/docs/event-day"],
+          ["活動後續", "/docs/follow-up"],
         ],
         SearchDialog: SearchDialog,
         options: {
