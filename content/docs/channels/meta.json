@@ -2,6 +2,6 @@
   "root": "true",
   "title": "溝通渠道",
   "description": "溝通渠道使用手冊",
-  "icon": "Building2",
+  "icon": "Rss",
   "pages": ["index", "getting-started", "contacts", "groups"]
 }

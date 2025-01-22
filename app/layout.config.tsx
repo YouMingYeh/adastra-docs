@@ -18,5 +18,10 @@ export const baseOptions: BaseLayoutProps = {
       url: "/docs/channels",
       active: "nested-url",
     },
+    {
+      text: "AI",
+      url: "/docs/ai",
+      active: "nested-url",
+    },
   ],
 };
