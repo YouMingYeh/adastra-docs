@@ -11,7 +11,7 @@ const inter = Inter({
 export const metadata = {
   title: "Adastra 使用手冊",
   description:
-    "這是 Adastra 的使用手冊，你可以在這裡找到所有如何使用 Adastra 的資訊。",
+    "這是 Adastra 的使用手冊，您可以在這裡找到所有如何使用 Adastra 的資訊。",
   image: "/logo.png",
 } as Metadata;
 

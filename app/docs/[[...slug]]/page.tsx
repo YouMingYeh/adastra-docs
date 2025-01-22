@@ -7,6 +7,8 @@ import {
 } from "fumadocs-ui/page";
 import { notFound } from "next/navigation";
 import defaultMdxComponents from "fumadocs-ui/mdx";
+import { ImageZoom } from "@/components/image-zoom";
+import { InlineTOC } from "@/components/inline-toc";
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -18,11 +20,30 @@ export default async function Page(props: {
   const MDX = page.data.body;
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
+    <DocsPage
+      toc={page.data.toc}
+      full={page.data.full}
+      editOnGithub={{
+        owner: "adastra-tw",
+        repo: "adastra-docs",
+        sha: "main",
+        // file path, make sure it's valid
+        path: `content/docs/${page.file.path}`,
+      }}
+    >
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
+      <InlineTOC items={page.data.toc} />
+
       <DocsBody>
-        <MDX components={{ ...defaultMdxComponents }} />
+        <MDX
+          components={{
+            ...defaultMdxComponents,
+            img: (props) => (
+              <ImageZoom className="max-w-md md:max-w-lg" {...props} />
+            ),
+          }}
+        />
       </DocsBody>
     </DocsPage>
   );

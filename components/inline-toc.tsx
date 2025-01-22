@@ -23,7 +23,7 @@ export function InlineTOC({
       className="not-prose rounded-lg border bg-fd-card text-fd-card-foreground"
     >
       <CollapsibleTrigger className="inline-flex w-full items-center justify-between p-4 font-medium [&[data-state=open]>svg]:rotate-180">
-        Table of Contents
+        目錄
         <ChevronDown className="size-4 transition-transform duration-200" />
       </CollapsibleTrigger>
       <CollapsibleContent>

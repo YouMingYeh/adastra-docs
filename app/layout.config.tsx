@@ -14,8 +14,8 @@ export const baseOptions: BaseLayoutProps = {
   },
   links: [
     {
-      text: "活動規劃",
-      url: "/docs/planning",
+      text: "溝通渠道",
+      url: "/docs/channels",
       active: "nested-url",
     },
   ],
