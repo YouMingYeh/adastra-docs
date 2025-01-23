@@ -1,12 +1,8 @@
 import "./global.css";
-import { Inter } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import type { ReactNode } from "react";
 import { Providers } from "./providers";
 import { Metadata } from "next";
-
-const inter = Inter({
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: "Adastra 使用手冊",
@@ -17,7 +13,7 @@ export const metadata = {
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
+    <html lang="en" className={GeistSans.className} suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
