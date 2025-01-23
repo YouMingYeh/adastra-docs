@@ -1,5 +1,6 @@
 {
   "title": "聯絡人功能",
   "description": "聯絡人功能使用手冊",
-  "pages": ["index"]
+  "pages": ["index"],
+  "icon": "User"
 }
